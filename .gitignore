@@ -1,0 +1,14 @@
+# ---- .NET ----
+bin/
+obj/
+*.user
+*.vs/
+# ---- Node / Quasar ----
+frontend/product-catalog/node_modules/
+frontend/product-catalog/dist/
+# ---- IDEs ----
+.vscode/
+.idea/
+# ---- Misc ----
+*.log
+.env
