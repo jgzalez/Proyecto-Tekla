@@ -1,26 +1,26 @@
 <script setup>
-import { ref, onMounted} from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import ProductForm from 'components/ProductForm.vue'
 import { api } from 'boot/axios'
 
 const $q = useQuasar()
 
-// --- state -----------------------------------------------------------
+// State ------------------------------------------------------------
 const products   = ref([])
 const loading    = ref(false)
-const formModel  = ref(null)
-const filter     = ref('')
+const formModel  = ref(null)      // bound to ProductForm dialog
+const search     = ref('')        // search box model
 
-// table columns definition
+// Table columns ----------------------------------------------------
 const cols = [
-  { name: 'name',     label: 'Name',     field: 'name',     sortable: true, align: 'left' },
-  { name: 'price',    label: 'Price',    field: 'price',    sortable: true, align: 'right' },
-  { name: 'category', label: 'Category', field: 'category', sortable: true, align: 'left' },
-  { name: 'actions',  label: '',         field: 'actions',  align: 'center' }
+  { name: 'name',     label: 'Name',     field: 'name',     sortable: true },
+  { name: 'price',    label: 'Price',    field: 'price',    sortable: true,
+    format: val => `$${Number(val).toFixed(2)}` },
+  { name: 'category', label: 'Category', field: 'category', sortable: true },
+  { name: 'actions',  label: '',         field: 'actions' }
 ]
 
-// --- methods --------------------------------------------------------
 function showForm (p = null) {
   formModel.value = p ? { ...p } : {}
 }
@@ -30,96 +30,77 @@ async function load () {
   try {
     products.value = (await api.get('/products')).data
   } catch (err) {
-    $q.notify({ type: 'negative', message: err.response?.data ?? err.message })
+    $q.notify({ type: 'negative', message: err.message })
   } finally {
     loading.value = false
   }
 }
 
 async function confirmDelete (id) {
-  $q.dialog({
-    title: 'Confirm',
-    message: 'Delete this product?',
-    cancel: true,
-    ok: { flat: true, color: 'negative', label: 'Delete' }
-  }).onOk(async () => {
-    try {
-      await api.delete(`/products/${id}`)
-      load()
-    } catch (err) {
-      $q.notify({ type: 'negative', message: err.response?.data ?? err.message })
-    }
-  })
+  $q.dialog({ title: 'Confirm', message: 'Delete this product?', cancel: true })
+    .onOk(async () => {
+      try {
+        await api.delete(`/products/${id}`)
+        load()
+      } catch (err) {
+        $q.notify({ type: 'negative', message: err.response?.data ?? err.message })
+      }
+    })
 }
 
 onMounted(load)
+
+// Computed list filtered by search --------------------------------
+const rows = computed(() =>
+  products.value.filter(p =>
+    p.name.toLowerCase().includes(search.value.toLowerCase()) ||
+    (p.category ?? '').toLowerCase().includes(search.value.toLowerCase())
+  )
+)
 </script>
 
 <template>
   <q-page class="q-pa-md">
-    <!-- Header bar -------------------------------------------------->
+    <!-- Header ---------------------------------------------------- -->
     <div class="row items-center justify-between q-mb-md">
-      <div class="row items-center text-h5 text-weight-medium">
-        <q-icon name="inventory_2" class="q-mr-sm" size="26px" />
-        Product Catalog
-      </div>
-
-      <div class="row items-center q-gutter-sm">
-        <q-input v-model="filter"
-                 outlined dense debounce="300"
-                 placeholder="Search…"
-                 class="bg-white rounded-borders">
-          <template #append>
-            <q-icon name="search" />
-          </template>
+      <div class="text-h5">📦 Product Catalog</div>
+      <div class="row items-center no-wrap">
+        <q-input
+          v-model="search"
+          dense outlined clearable debounce="300" placeholder="Search…"
+          class="q-mr-sm gt-xs"
+        >
+          <template #append><q-icon name="search" /></template>
         </q-input>
-
-        <q-btn color="primary" unelevated icon="add" label="Add" @click="showForm" />
+        <q-btn unelevated color="primary" icon="add" label="Add" @click="showForm" />
       </div>
     </div>
 
-    <!-- Products table --------------------------------------------->
-    <q-card flat bordered class="shadow-2">
+    <!-- Table ----------------------------------------------------- -->
+    <q-card flat bordered class="q-pa-sm">
       <q-table
-        :rows="products"
+        :rows="rows"
         :columns="cols"
         row-key="id"
         :loading="loading"
-        :filter="filter"
-        wrap-cells
-        flat bordered
+        flat bordered wrap-cells
         class="my-table"
+        :no-data-label="search ? 'No matches' : 'No products'"
       >
-        <!-- custom price format -->
-        <template #body-cell-price="props">
-          <q-td :props="props" align="right">
-            {{ Number(props.row.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }}
-          </q-td>
-        </template>
-
-        <!-- action buttons -->
         <template #body-cell-actions="props">
-          <q-td align="center" class="q-gutter-xs">
-            <q-btn flat round dense icon="edit"  color="primary"  @click.stop="showForm(props.row)" />
-            <q-btn flat round dense icon="delete" color="negative" @click.stop="confirmDelete(props.row.id)" />
+          <q-td align="center" class="q-gutter-sm">
+            <q-btn flat round dense icon="edit"    color="primary"  @click.stop="showForm(props.row)" />
+            <q-btn flat round dense icon="delete"  color="negative" @click.stop="confirmDelete(props.row.id)" />
           </q-td>
-        </template>
-
-        <!-- no data slot -->
-        <template #no-data>
-          <div class="text-grey q-pa-md text-center">No products found</div>
         </template>
       </q-table>
     </q-card>
 
-    <!-- Product dialog -->
+    <!-- Dialog ---------------------------------------------------- -->
     <ProductForm v-model="formModel" @saved="load" />
   </q-page>
 </template>
 
 <style scoped>
-.my-table .q-td {
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
+.my-table .q-td { padding-top: 12px; padding-bottom: 12px; }
 </style>
