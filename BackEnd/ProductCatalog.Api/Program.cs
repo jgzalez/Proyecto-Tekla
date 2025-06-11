@@ -5,8 +5,29 @@ using ProductCatalog.Api.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(o => o.UseInMemoryDatabase("ProductsDb"));
+
+
 builder.Services.AddCors(opt => opt.AddDefaultPolicy(
-    p => p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:9000"))); // Quasar Dev server
+    p => p.WithOrigins("http://localhost:9000")
+          .AllowAnyHeader()
+          .AllowAnyMethod()
+));
+
+// 🔑  CORS
+const string FrontOrigin = "FrontendDev";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: FrontOrigin, policy =>
+    {
+        policy
+          .WithOrigins("http://localhost:9000")  // Quasar dev server
+          .AllowAnyHeader()
+          .AllowAnyMethod();
+        // Si usas credenciales (cookies/Authorization):
+        // .AllowCredentials();
+    });
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -46,5 +67,9 @@ app.MapDelete("/api/products/{id:int}", async (int id, AppDbContext db) =>
     await db.SaveChangesAsync();
     return Results.NoContent();
 });
+
+app.UseCors();
+app.UseCors(FrontOrigin);   // 👈 habilita la política
+
 
 app.Run();
