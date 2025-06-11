@@ -3,19 +3,7 @@
 _Solución basada en **.NET 9 Web API** (backend) y **Quasar 2 / Vue 3** (frontend)._
 Permite gestionar un catálogo de productos con operaciones CRUD completas.
 
-───────────────────────────────────────────────────────────────────────────────
-Estructura del repositorio
-───────────────────────────────────────────────────────────────────────────────
-.
-├─ BackEnd/
-│  └─ ProductCatalog.Api/          # API REST (Minimal API + EF Core In-Memory)
-├─ FrontEnd/
-│  └─ product-catalog-fullstack/   # Quasar SPA (Vite + Composition API)
-└─ README.md                       # este archivo
 
-───────────────────────────────────────────────────────────────────────────────
-Requisitos
-───────────────────────────────────────────────────────────────────────────────
 • .NET SDK 9.x (Preview 5 o superior)
 • Node.js 18 LTS / 20 LTS
 • Quasar CLI 2.5+
