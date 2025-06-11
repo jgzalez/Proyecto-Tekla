@@ -87,3 +87,4 @@ C:\Users\kingd\Desktop\Nueva carpeta\Proyecto-Tekla\BackEnd\ProductCatalog.Api\o
 C:\Users\kingd\Desktop\Nueva carpeta\Proyecto-Tekla\BackEnd\ProductCatalog.Api\obj\Debug\net9.0\ProductCatalog.Api.pdb
 C:\Users\kingd\Desktop\Nueva carpeta\Proyecto-Tekla\BackEnd\ProductCatalog.Api\obj\Debug\net9.0\ProductCatalog.Api.genruntimeconfig.cache
 C:\Users\kingd\Desktop\Nueva carpeta\Proyecto-Tekla\BackEnd\ProductCatalog.Api\obj\Debug\net9.0\ref\ProductCatalog.Api.dll
+C:\Users\jgonz\Downloads\Proyecto Tekla\BackEnd\ProductCatalog.Api\obj\Debug\net9.0\ProductCatalog.Api.sourcelink.json

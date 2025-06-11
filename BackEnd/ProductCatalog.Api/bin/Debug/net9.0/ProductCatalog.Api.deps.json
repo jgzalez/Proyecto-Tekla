@@ -9,6 +9,7 @@
       "ProductCatalog.Api/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": "9.0.6",
+          "Microsoft.EntityFrameworkCore": "9.0.6",
           "Microsoft.EntityFrameworkCore.InMemory": "9.0.6",
           "Swashbuckle.AspNetCore": "8.1.4"
         },

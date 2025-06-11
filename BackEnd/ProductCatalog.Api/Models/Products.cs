@@ -14,7 +14,7 @@ public class Product
     [MaxLength(500)]
     public string? Description { get; set; }
 
-    [Range(0, 1_000_000)]
+    [Range(0.01, 999999.99, ErrorMessage = "El precio debe estar entre 0.01 y 999999.99")]
     public decimal Price { get; set; }
 
     [Required, MaxLength(100)]
