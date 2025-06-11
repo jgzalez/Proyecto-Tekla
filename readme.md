@@ -2,7 +2,7 @@
 # Catálogo de Productos – Prueba Técnica Full-Stack
 
 _Solución basada en **.NET 9 Web API** (backend) y **Quasar 2 / Vue 3** (frontend)._
-Permite gestionar un catálogo de productos con operaciones CRUD completas.
+Permite gestionar un catálogo simple de productos con operaciones CRUD para los atributos de cada uno.
 
 ## Requisitos Previos
 - .NET SDK 9.x (Preview 5 o superior)
