@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kingd\\Desktop\\Nueva carpeta\\Proyecto-Tekla\\BackEnd\\ProductCatalog.Api\\ProductCatalog.Api.csproj": {}
+    "C:\\Users\\jgonz\\Downloads\\Proyecto Tekla\\BackEnd\\ProductCatalog.Api\\ProductCatalog.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kingd\\Desktop\\Nueva carpeta\\Proyecto-Tekla\\BackEnd\\ProductCatalog.Api\\ProductCatalog.Api.csproj": {
+    "C:\\Users\\jgonz\\Downloads\\Proyecto Tekla\\BackEnd\\ProductCatalog.Api\\ProductCatalog.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kingd\\Desktop\\Nueva carpeta\\Proyecto-Tekla\\BackEnd\\ProductCatalog.Api\\ProductCatalog.Api.csproj",
+        "projectUniqueName": "C:\\Users\\jgonz\\Downloads\\Proyecto Tekla\\BackEnd\\ProductCatalog.Api\\ProductCatalog.Api.csproj",
         "projectName": "ProductCatalog.Api",
-        "projectPath": "C:\\Users\\kingd\\Desktop\\Nueva carpeta\\Proyecto-Tekla\\BackEnd\\ProductCatalog.Api\\ProductCatalog.Api.csproj",
-        "packagesPath": "C:\\Users\\kingd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kingd\\Desktop\\Nueva carpeta\\Proyecto-Tekla\\BackEnd\\ProductCatalog.Api\\obj\\",
+        "projectPath": "C:\\Users\\jgonz\\Downloads\\Proyecto Tekla\\BackEnd\\ProductCatalog.Api\\ProductCatalog.Api.csproj",
+        "packagesPath": "C:\\Users\\jgonz\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jgonz\\Downloads\\Proyecto Tekla\\BackEnd\\ProductCatalog.Api\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\kingd\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\jgonz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -51,6 +45,10 @@
           "targetAlias": "net9.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.6, )"
             },
@@ -82,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
