@@ -37,3 +37,8 @@ Permite gestionar un catálogo simple de productos con operaciones CRUD para los
 - PUT    /api/products/{id}      → actualizar producto
 - DELETE /api/products/{id}      → eliminar producto
 
+## Retos Encontrados + Recursos de Aprendizaje
+
+El uso de Quasar como Framework de Desarrollo, no lo conocía, tuve que familiarizarme con Vue y el uso de los componentes de Quasar, apoyandome de la documentación e IA Generativa para crear la interfaz, pero los componentes pregenerados son muy convenientes, me permitieron crear más con menos líneas de código.
+
+
